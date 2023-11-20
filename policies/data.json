@@ -1,0 +1,12 @@
+{
+    "resources": [
+        "Common",
+        "Contracts",
+        "Temp"
+    ],
+    "roles": [
+        {"Admin": "full"},
+        {"User": "edit"},
+        {"Guest": "view"}
+    ]
+}
