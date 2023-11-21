@@ -1,14 +1,21 @@
 {
-    "app": {
-        "resources": [
-            "Common",
-            "Contracts",
-            "Temp"
+    "resources": [
+        "Red",
+        "Green",
+        "Blue",
+        "Yellow"
+    ],
+    "roles": {
+        "ADMIN": [
+            {"view": ["Red", "Green", "Blue", "Yellow"]},
+            {"edit": ["Red", "Green", "Blue", "Yellow"]}
         ],
-        "roles": [
-            {"Admin": "full"},
-            {"User": "edit"},
-            {"Guest": "view"}
+        "USER": [
+            {"view": ["Red", "Green", "Blue", "Yellow"]},
+            {"edit": ["Blue", "Yellow"]}
+        ],
+        "GUEST": [
+            {"view": ["Red", "Green", "Blue", "Yellow"]}
         ]
     }
 }
