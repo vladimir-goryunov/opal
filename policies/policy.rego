@@ -20,7 +20,7 @@ permissions contains resource if {
 
 	resource := {
 		"resource": resourceName,
-		"roles[role]": roles[role],
+		"roles[role][_]": roles[role][_],
 		"access": access(resourceName, token, data.policies.roles)
 	}
 }
