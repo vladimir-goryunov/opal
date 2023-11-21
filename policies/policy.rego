@@ -7,8 +7,8 @@ permissions contains resource if {
 	some resourceName in data.resources
 	some token in input[_]
 	resource := {
-		"resource": resourceName,
-		"access": access(resourceName, token, data.roles)
+		"resource": resourceName
+		#"access": access(resourceName, token, data.roles)
 	}
 }
 
