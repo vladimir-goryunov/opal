@@ -4,8 +4,8 @@ How to run the OPAL-server and OPAL-client to read the policies from the GitHub 
 ## Repo Structure
     .
     └─ policies
-         ├─ data.json   - Файл политик
-         └─ policy.rego - Скрипт для выбора политик по запросу
+         ├─ data.json   - Policy data 
+         └─ policy.rego - Script for selecting policies on demand
 
 CAUTION! The public github repository must be used
 
