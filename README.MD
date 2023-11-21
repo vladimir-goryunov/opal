@@ -20,4 +20,4 @@ Specify the URL of your public github repo in docker-compose.yml:
 3. How to check:
 * `POST request`
 * `http://localhost:8181/v1/data/amp/wf`  
-* `Request Body`=`{ "input": { "groups" : ["ADMIN", "USERS"]}}`
+* `Request Body`=`{ "input": { "groups" : ["ADMIN", "USER"]}}`

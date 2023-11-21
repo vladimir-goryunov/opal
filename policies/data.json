@@ -6,15 +6,30 @@
         "Yellow"
     ],
     "roles": {
-        "ADMIN": [
+        "DEMAND_ADMIN": [
             {"view": ["Red", "Green", "Blue", "Yellow"]},
             {"edit": ["Red", "Green", "Blue", "Yellow"]}
         ],
-        "USER": [
-            {"view": ["Red", "Green"]},
-            {"edit": ["Blue", "Yellow"]}
+        "DEMAND_USER": [
+            {"view": ["Blue", "Yellow"]},
+            {"edit": ["Red", "Green"]}
         ],
-        "GUEST": [
+        "SUPPLY_ADMIN": [
+            {"view": ["Red", "Blue", "Yellow"]},
+            {"edit": ["Green", "Blue"]}
+        ],
+        "SUPPLY_USER": [
+            {"view": ["Red", "Blue"]},
+            {"edit": ["Green", "Yellow"]}
+        ],
+        "EXEC_USER": [
+            {"view": ["Red", "Yellow"]},
+            {"edit": ["Green", "Blue"]}
+        ],
+        "ADMIN": [
+            {"edit": ["Red", "Green", "Blue", "Yellow"]}
+        ],
+        "ADMIN_TECH": [
             {"view": ["Red", "Green", "Blue", "Yellow"]}
         ]
     }
