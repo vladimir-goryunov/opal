@@ -5,11 +5,12 @@ import future.keywords
 permissions contains resource if {
 
 	some resourceName in data.policies.resources
-	some token in input.groups
+	#some token in input.groups
 	resource := {
 		"resource": resourceName,
 		"token": token,
-		"access": access(resourceName, token, data.policies.roles)
+		"access": access(resourceName, input, data.policies.roles)
+		#"access": access(resourceName, token, data.policies.roles)
 	}
 }
 
