@@ -11,7 +11,7 @@
             {"edit": ["Red", "Green", "Blue", "Yellow"]}
         ],
         "USER": [
-            {"view": ["Red", "Green", "Blue", "Yellow"]},
+            {"view": ["Red", "Green"]},
             {"edit": ["Blue", "Yellow"]}
         ],
         "GUEST": [
