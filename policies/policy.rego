@@ -11,7 +11,7 @@ permissions contains resource if {
 
 	resource := {
 		"resource": resourceName,
-		"roles[role]": roles[role][_]
+		"roles[role][_][edit]": roles[role][_]["edit"]
 	}
 }
 
