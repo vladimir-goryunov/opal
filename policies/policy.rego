@@ -19,16 +19,16 @@ permissions contains resource if {
 
 	resource := {
 		"resource": resourceName,
-		"role": role
-		#"access": access(resourceName, token, data.policies.roles)
+		"roles[role]": roles[role],
+		"access": access(resourceName, token, data.policies.roles)
 	}
 }
 
 access(resourceName, token, roles) := "edit" if {
-    some role in token.groups[_]
+    some role in token.groups
     resourceName in roles[role][_]["edit"]
 } else := "view" if {
-    some role in token.groups[_]
+    some role in token.groups
     resourceName in roles[role][_]["view"]
 } else := "unknown"
 
