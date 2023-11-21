@@ -3,12 +3,13 @@ package amp.wf
 import future.keywords
 
 permissions contains resource if {
+    token := get_token(input)
 
 	some resourceName in data.policies.resources
 
 	resource := {
 		"resource": resourceName,
-		"access": access(resourceName, input, data.policies.roles)
+		"access": access(resourceName, token, data.policies.roles)
 	}
 }
 
@@ -20,13 +21,6 @@ access(resourceName, token, roles) := "edit" if {
     resourceName in roles[role][_]["view"]
 } else := "unknown"
 
-
-#permissions contains resource if {
-#	some resourceName in data.policies.resources
-#	resource := {
-#		"resource": resourceName,
-#		"token": token,
-#		"access": access(resourceName, input, data.policies.roles)
-#		#"access": access(resourceName, token, data.policies.roles)
-#	}
-#}
+get_token(jwt) = jwt if {
+	jwt != ""
+}
