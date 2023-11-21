@@ -2,14 +2,14 @@ package amp.wf
 
 import future.keywords
 
-permissions_with_resources contains resource if {
+permissions contains resource if {
 
 	some resourceName in data.policies.resources
-	#some token in input[_]
+	some token in input[_]
 	resource := {
-		"resource": resourceName
-		#"token": token
-		#"access": access(resourceName, token, data.roles)
+		"resource": resourceName,
+		"token": token
+		#"access": access(resourceName, token, data.policies.roles)
 	}
 }
 
