@@ -15,9 +15,11 @@ permissions contains resource if {
     token := get_token(input.token)
 
 	some resourceName in data.policies.resources
+    some role in token.groups[_]
 
 	resource := {
 		"resource": resourceName,
+		"role": role,
 		"access": access(resourceName, token, data.policies.roles)
 	}
 }
