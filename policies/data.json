@@ -3,41 +3,33 @@
         "Red",
         "Green",
         "Blue",
-        "Yellow",
-        "DEMAND_ADMIN",
-        "DEMAND_USER",
-        "SUPPLY_ADMIN",
-        "SUPPLY_USER",
-        "EXEC_USER",
-        "ADMIN",
-        "ADMIN_TECH"
+        "Yellow"
     ],
     "roles": {
         "DEMAND_ADMIN": [
             {"view": ["Red", "Green", "Blue", "Yellow"]},
-            {"edit": ["Red", "Green", "Blue", "Yellow", "DEMAND_ADMIN"]}
+            {"edit": ["Red", "Green", "Blue", "Yellow"]}
         ],
         "DEMAND_USER": [
             {"view": ["Blue", "Yellow"]},
-            {"edit": ["Red", "Green", "DEMAND_USER"]}
+            {"edit": ["Red", "Green"]}
         ],
         "SUPPLY_ADMIN": [
             {"view": ["Red", "Blue", "Yellow"]},
-            {"edit": ["Green", "Blue", "SUPPLY_ADMIN"]}
+            {"edit": ["Green", "Blue"]}
         ],
         "SUPPLY_USER": [
             {"view": ["Red", "Blue"]},
-            {"edit": ["Green", "Yellow", "SUPPLY_USER"]}
+            {"edit": ["Green", "Yellow"]}
         ],
         "EXEC_USER": [
             {"view": ["Red", "Yellow"]},
-            {"edit": ["Green", "Blue", "EXEC_USER"]}
+            {"edit": ["Green", "Blue"]}
         ],
         "ADMIN": [
-            {"edit": ["Red", "Green", "Blue", "Yellow", "ADMIN"]}
+            {"edit": ["Red", "Green", "Blue", "Yellow"]}
         ],
         "ADMIN_TECH": [
-            {"edit": ["ADMIN_TECH"]},
             {"view": ["Red", "Green", "Blue", "Yellow"]}
         ]
     }
