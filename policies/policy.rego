@@ -16,6 +16,7 @@ permissions contains resource if {
 
 	some resourceName in data.policies.resources
     some role in token.groups
+    roles := data.policies.roles
 
 	resource := {
 		"resource": resourceName,
