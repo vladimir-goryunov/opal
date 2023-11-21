@@ -5,12 +5,12 @@ import future.keywords
 permissions contains resource if {
 
 	some resourceName in data.policies.resources
-	some role in input.groups
-    roles := data.policies.roles
+	#some role in input.groups
+    #roles := data.policies.roles
 
 	resource := {
 		"resource": resourceName,
-		"roles[role][_]": roles[role][_],
+		#"roles[role][_]": roles[role][_],
 		"access": access(resourceName, input, data.policies.roles)
 	}
 }
