@@ -19,4 +19,4 @@ access(resourceName, token, roles) := "edit" if {
 } else := "view" if {
     some role in token.groups
     resourceName in roles[role][_]["view"]
-} else := "view"
+} else := "unknown"
