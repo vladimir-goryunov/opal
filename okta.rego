@@ -15,7 +15,9 @@ userPermissions contains permission if {
 
 politics(user) = politic {
     some role in user.groups
-    politic := role
+    politic := {
+        "role": role
+    }
 }
 
 #	some resourceName in data.resources
