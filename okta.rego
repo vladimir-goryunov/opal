@@ -15,9 +15,9 @@ import data.http
 
 
 output contains result if {
-    #response := http.send({"method": "GET", "url": "http://localhost:10522/weatherforecast"})
-    #body := http.response.body(response)
-    body := "body-of-request"
+    response := http.send({"method": "GET", "url": "http://localhost:10522/weatherforecast"})
+    body := http.response.body(response)
+    #body := "body-of-request"
 	result := {
 		debug(body)
     }
