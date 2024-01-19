@@ -7,19 +7,17 @@ userPermissions contains permission if {
 	some user in input.users
 	permission := {
 		"login": user.login,
-		#"resourceName": resourceName,
 		"politics": politics(user)
 	}
 }
 
-politics(user) = politic {
-    some role in user.groups
-    politic := {
-        "resourceName": "resource",
-        "groups": user.groups
-    }
+politics(user) = resource {
+    some resourceName in data.resources
+	resource := {
+		"resource": resourceName,
+		"access": access(resourceName, user, data.roles)
+	}
 }
-
 
 access(resourceName, user, roles) = result {
     some role
@@ -31,6 +29,17 @@ access(resourceName, user, roles) = result {
     role in user.groups
     resourceName in roles[role][_]["view"]
 } else = "deny"
+
+
+
+#politics(user, roles) = politic {
+#    some role in user.groups
+#    politic := {
+#        "resourceName": "resource",
+#        "groups": user.groups
+#    }
+#}
+
 
 
 #	some resourceName in data.resources
