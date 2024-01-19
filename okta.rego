@@ -13,9 +13,25 @@ userPermissions contains permission if {
 }
 
 politics(user) = politic {
-    #some role in user.groups
-    politic = user.groups
+    some role in user.groups
+    politic := {
+        "resourceName": "resource",
+        "groups": user.groups
+    }
 }
+
+
+access(resourceName, user, roles) = result {
+    some role
+    role in user.groups
+    resourceName in roles[role][_]["edit"]
+    result := "edit"
+} else = "view" {
+    some role
+    role in user.groups
+    resourceName in roles[role][_]["view"]
+} else = "deny"
+
 
 #	some resourceName in data.resources
 #    resource := {
