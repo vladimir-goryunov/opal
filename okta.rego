@@ -2,22 +2,18 @@ package amp.okta.integration
 
 import future.keywords
 
-import data.http
 
-#default allow = false
-#
-#allow {
-#    response := http.send({"method": "GET", "url": "http://localhost:10522/weatherforecast"})
-#    body := http.response.body(response)
-#    contains(body, "success")
-#    printf("Response body: %v\n", [body])
-#}
-
+userPermissions contains resource if {
+	some user in input.users
+	resource := {
+		"user": user,
+		"resource": "resource_placeholder",
+		"access": "access_placeholder"
+	}
+}
 
 output contains result if {
-    response := http.send({"method": "GET", "url": "http://localhost:10522/weatherforecast"})
-    body := http.response.body(response)
-    #body := "body-of-request"
+    body := "body-of-request"
 	result := {
 		debug(body)
     }
