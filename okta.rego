@@ -14,8 +14,7 @@ userPermissions contains permission if {
 }
 
 politics(user) = politic {
-    some role
-    role in user.groups
+    some role in user.groups
     politic := role
 }
 
