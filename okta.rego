@@ -4,7 +4,7 @@ import future.keywords
 
 output contains result if {
 	result := {
-		debug(data.resources)
+		debug("data.resources")
     }
 }
 
