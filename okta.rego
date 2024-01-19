@@ -11,12 +11,17 @@ userPermissions contains permission if {
 }
 
 politics(user) = resource {
-    #some resourceName in data.resources
-	resource := {
-		"resource": data.resources,
+    #resourceName in data.resources
+	resource = recognize(user, data.resources)
+}
+
+recognize(user, resourceName) = reco {
+	reco := {
+		"resource": resourceName,
 		"access": "access(resourceName, user, data.roles)"
 	}
 }
+
 
 access(resourceName, user, roles) = result {
     some role
