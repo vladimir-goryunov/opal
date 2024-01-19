@@ -5,8 +5,11 @@ import future.keywords
 
 userPermissions contains permission if {
 	some user in input.users
+
+	some resourceName in data.resources
 	permission := {
 		"login": user.login,
+		"resourceName": resourceName,
 		"politics": "resource_access_placeholder"
 	}
 }
