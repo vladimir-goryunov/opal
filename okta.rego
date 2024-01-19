@@ -18,7 +18,7 @@ politics(user) = resource {
 recognize(user, resourceName) = reco {
 	reco := {
 		"resource": resourceName,
-		"access": "access(resourceName, user, data.roles)"
+		"access": access(resourceName, user, data.roles)
 	}
 }
 
