@@ -11,8 +11,8 @@ userPermissions contains permission if {
 }
 
 politics(user) = resource {
-    #resourceName in data.resources
-	resource = recognize(user, data.resources)
+    some resourceName in data.resources
+	resource = recognize(user, resourceName)
 }
 
 recognize(user, resourceName) = reco {
