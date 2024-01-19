@@ -14,7 +14,7 @@ politics(user) = resource {
     some resourceName in data.resources
 	resource := {
 		"resource": resourceName,
-		"access": access(resourceName, user, data.roles)
+		"access": "access(resourceName, user, data.roles)"
 	}
 }
 
