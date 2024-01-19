@@ -1,10 +1,11 @@
-package amp.okta.integration
+package amp.okta
 
 import future.keywords
 
 output contains result if {
+    some resourceName in data.resources
 	result := {
-		debug("data.resources")
+		debug(resourceName)
     }
 }
 
