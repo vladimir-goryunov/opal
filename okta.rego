@@ -9,7 +9,6 @@ userPermissions contains permission if {
 		"login": user.login,
 		"politics": "resource_access_placeholder"
 	}
-
 }
 
 #	some resourceName in data.resources

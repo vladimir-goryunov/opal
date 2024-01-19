@@ -4,9 +4,17 @@
         "Contracts",
         "Temp"
     ],
-    "roles": [
-        {"Admin": "full"},
-        {"User": "edit"},
-        {"Guest": "view"}
-    ]
+    "roles": {
+        "Admin": [
+            {"view": ["Common", "Contracts", "Temp"]},
+            {"edit": ["Common", "Contracts", "Temp"]}
+        ],
+        "User": [
+            {"view": ["Common", "Temp"]},
+            {"edit": ["Contracts"]}
+        ],
+        "Guest": [
+            {"view": ["Common", "Contracts", "Temp"]}
+        ]
+    }
 }
