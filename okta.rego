@@ -2,7 +2,6 @@ package amp.okta
 
 import future.keywords
 
-
 userPermissions contains permission if {
 	some user in input.users
 	permission := {
