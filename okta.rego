@@ -14,7 +14,7 @@ userPermissions contains permission if {
 
 politics(user) = politic {
     #some role in user.groups
-    politic = debug(user.groups)
+    politic = user.groups
 }
 
 #	some resourceName in data.resources
