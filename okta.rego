@@ -1,4 +1,4 @@
-package amp.wf
+package amp.okta.integration
 
 import future.keywords
 
