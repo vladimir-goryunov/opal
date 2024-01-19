@@ -1,24 +1,51 @@
-package amp.okta.integration
+package amp.okta
 
 import future.keywords
 
 
 userPermissions contains resource if {
 	some user in input.users
-	resource := {
-		"user": user,
-		"resource": "resource_placeholder",
-		"access": "access_placeholder"
+	permission := {
+		"login": user.login,
+		"politics": "resource_access_placeholder"
 	}
+
 }
 
-output contains result if {
-    body := "body-of-request"
-	result := {
-		debug(body)
-    }
-}
+#	some resourceName in data.resources
+#    resource := {
+#        "resource": resourceName
+#    }
 
-debug(value) := "" if {
-	value == ""
-} else = value
+#permissions contains resource if {
+#	token := get_token(input.token)
+#
+#	some resourceName in data.policies.resources
+#
+#	resource := {
+#		"resource": resourceName,
+#		"access": access(resourceName, token, data.policies.roles)
+#	}
+#}
+#
+#access(resourceName, token, roles) = result {
+#    some role
+#    role in token.groups
+#    resourceName in roles[role][_]["edit"]
+#    result := "edit"
+#} else = "view" {
+#    some role
+#    role in token.groups
+#    resourceName in roles[role][_]["view"]
+#} else = "deny"
+
+#output contains result if {
+#    body := "body-of-request"
+#	result := {
+#		debug(body)
+#    }
+#}
+
+#debug(value) := "" if {
+#	value == ""
+#} else = value
