@@ -5,7 +5,6 @@ import future.keywords
 
 userPermissions contains permission if {
 	some user in input.users
-
 	permission := {
 		"login": user.login,
 		#"resourceName": resourceName,
@@ -15,9 +14,7 @@ userPermissions contains permission if {
 
 politics(user) = politic {
     #some role in user.groups
-    politic := {
-        "role": debug(user.groups)
-    }
+    politic = debug(user.groups)
 }
 
 #	some resourceName in data.resources
