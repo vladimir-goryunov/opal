@@ -3,7 +3,7 @@ package amp.okta
 import future.keywords
 
 
-userPermissions contains resource if {
+userPermissions contains permission if {
 	some user in input.users
 	permission := {
 		"login": user.login,
