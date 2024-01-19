@@ -14,9 +14,9 @@ userPermissions contains permission if {
 }
 
 politics(user) = politic {
-    some role in user.groups
+    #some role in user.groups
     politic := {
-        "role": role
+        "role": debug(user.groups)
     }
 }
 
@@ -54,6 +54,6 @@ politics(user) = politic {
 #    }
 #}
 
-#debug(value) := "" if {
-#	value == ""
-#} else = value
+debug(value) := "" if {
+	value == ""
+} else = value
