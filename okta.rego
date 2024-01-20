@@ -9,8 +9,8 @@ user_permissions[permission] {
         "login": login,
         "accessRights": [
             {
-                "resource": resource,
-                "access": access_decision(resource, user, roles)
+                "access": resource,
+                "resource": access_decision(resource, user, roles)
             } |
             role := user.groups[_]
             resource := resource
