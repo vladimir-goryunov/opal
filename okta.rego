@@ -6,20 +6,20 @@ import data.resources
 user_permissions = {
     "result": {
         "user_permissions": [
-            access_rights_for_user(input.users[i])
+            {
+                "login": input.users[i].login,
+                "accessRights": access_rights_for_user(input.users[i])
+            }
             |
             i < count(input.users)
         ]
     }
 }
 
-access_rights_for_user(user) = {
-    "login": user.login,
-    "accessRights": access_rights_for_groups(user.groups)
-}
+access_rights_for_user(user) = access_rights_for_groups(user.groups)
 
-access_rights_for_groups(groups) = [access_rights_for_resource(role, resource) |
-    role := groups[k]
+access_rights_for_groups(groups) = [access_rights_for_resource(group, resource) |
+    group := groups[k]
     resource := data.resources[j]
     j < count(data.resources)
     k < count(groups)
