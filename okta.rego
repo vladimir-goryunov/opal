@@ -29,7 +29,7 @@ get_access_decision(permission) = "view" {
 }
 
 get_access_decision(permission) = "edit" {
-    permission == "the_edit"
+    permission == "edit"
 }
 
 get_access_decision(permission) = "deny" {
