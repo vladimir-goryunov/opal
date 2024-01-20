@@ -1,30 +1,21 @@
 package amp.okta
-
 import data.roles
 
 user_permissions[permission] {
     user := input.users[_]
     login := user.login
+    groups := user.groups
     permission := {
         "login": login,
         "accessRights": [
             {
                 "resource": resource,
-                "access": access
+                "access": access[0]
             } |
-            role := user.groups[_]
+            role := groups[_]
+            role_permissions := roles[role][_]
             resource := key
-            access := access(resource, user, roles)
+            access := role_permissions[resource]
         ]
     }
-}
-
-access(resource, user, roles) = result {
-    some role
-    role = user.groups[_]
-    some permission
-    permission = roles[role][_][resource]
-    result := permission
-} else = "deny" {
-    result := "deny"
 }
