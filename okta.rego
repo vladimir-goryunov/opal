@@ -1,6 +1,5 @@
 package amp.okta
 
-
 import data.roles
 import data.resources
 
@@ -9,17 +8,13 @@ user_permissions[permission] {
     login := user.login
     permission := {
         "login": login,
-        "accessRights": access_decisions(user, roles)
+        "accessRights": [access_decision(resource, user, roles) |
+                        role := user.groups[_]
+                        resource := data.resources[_]
+                        decision := get_access_decision(roles[role][_][resource], resource)
+                        decision != {}
+        ]
     }
-}
-
-access_decisions(user, roles) = decisions {
-    decisions := [access_decision(resource, user, roles) |
-        role := user.groups[_]
-        resource := data.resources[_]
-        decision := get_access_decision(roles[role][_][resource], resource)
-        decision != {}
-    ]
 }
 
 access_decision(resource, user, roles) = decision {
