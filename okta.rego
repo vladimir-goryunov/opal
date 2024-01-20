@@ -34,7 +34,7 @@ access_rights(resource, role) = {
 
 access_rights(resource, role) = {
     "resource": resource,
-    "access": "deny"
+    "access": "none"
 } {
     not contains(data.roles[role][_].view, resource)
     not contains(data.roles[role][_].edit, resource)
