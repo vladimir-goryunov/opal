@@ -10,28 +10,21 @@ user_permissions[permission] {
         "accessRights": [
             {
                 "resource": resource,
-                "access": access_decision(resource, user, roles)
+                "access": access
             } |
             role := user.groups[_]
-            resource := resource
+            resource := key
+            access := access(resource, user, roles)
         ]
     }
 }
 
-access_decision(resource, user, roles) = decision {
-    role := user.groups[_]
-    permission := roles[role][_][resource]
-    decision := get_access_decision(permission)
-}
-
-get_access_decision(permission) = "view" {
-    permission != null
-}
-
-get_access_decision(permission) = "edit" {
-    permission == "edit"
-}
-
-get_access_decision(permission) = "deny" {
-    not permission
+access(resource, user, roles) = result {
+    some role
+    role = user.groups[_]
+    some permission
+    permission = roles[role][_][resource]
+    result := permission
+} else = "deny" {
+    result := "deny"
 }
