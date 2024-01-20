@@ -8,29 +8,38 @@ user_permissions[permission] {
     login := user.login
     permission := {
         "login": login,
-        "accessRights": [access_decision(resource, user, roles) |
-                        role := user.groups[_]
-                        resource := data.resources[_]
-                        decision := get_access_decision(roles[role][_][resource], resource)
-                        decision != {}
-        ]
+        "accessRights": access_decisions(user, roles)
     }
 }
 
-access_decision(resource, user, roles) = decision {
-    role := user.groups[_]
-    permission := roles[role][_][resource]
-    decision := get_access_decision(permission, resource)
+access_decisions(user, roles) = decisions {
+    decisions := [access_decision(resource, user, roles) |
+        resource := data.resources[_]
+        decision := get_access_decision(user, roles, resource)
+        decision != {}
+    ]
 }
 
-get_access_decision(permission, resource) = {"access": "view", "resource": resource} {
+access_decision(resource, user, roles) = {"access": decision, "resource": resource} {
+    role := user.groups[_]
+    permission := roles[role][_][resource]
+    decision := get_access_decision(user, roles, resource)
+}
+
+get_access_decision(user, roles, resource) = decision {
+    role := user.groups[_]
+    permission := roles[role][_][resource]
+    decision := get_decision(permission)
+}
+
+get_decision(permission) = "view" {
     permission == "view"
 }
 
-get_access_decision(permission, resource) = {"access": "edit", "resource": resource} {
+get_decision(permission) = "edit" {
     permission == "edit"
 }
 
-get_access_decision(permission, resource) = {"access": "deny", "resource": resource} {
+get_decision(permission) = "deny" {
     not permission
 }
