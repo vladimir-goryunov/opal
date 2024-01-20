@@ -1,6 +1,5 @@
 package amp.okta
-
-import future.keywords
+import data.roles
 
 user_permissions[permission] {
     user := input.users[_]
@@ -8,7 +7,7 @@ user_permissions[permission] {
     groups := user.groups
     permission := {
         "login": login,
-        "accessRights": [access_right(resource, groups, data.roles) | resource := data.resources]
+        "accessRights": [access_right(resource, groups, roles) | resource := data.resources]
     }
 }
 
@@ -17,7 +16,6 @@ access_right(resource, groups, roles) = access {
 }
 
 get_access(groups, resource, roles) = result {
-    some role
     role = groups[_]
     role_permissions := roles[role][_]
     resource_access := role_permissions[resource]
