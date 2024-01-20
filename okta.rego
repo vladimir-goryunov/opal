@@ -5,18 +5,26 @@ import data.roles
 user_permissions[permission] {
     user := input.users[_]
     login := user.login
-    groups := user.groups
     permission := {
         "login": login,
         "accessRights": [
             {
                 "resource": resource,
-                "access": access[0]
+                "access": access
             } |
-            role := groups[_]
-            role_permissions := roles[role][_]
+            role := user.groups[_]
             resource := key
-            access := role_permissions[resource]
+            access := access(resource, user, roles)
         ]
     }
+}
+
+access(resource, user, roles) = result {
+    some role
+    role = user.groups[_]
+    some permission
+    permission = roles[role][_][resource]
+    result := permission
+} else = "deny" {
+    result := "deny"
 }
