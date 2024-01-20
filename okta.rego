@@ -1,4 +1,5 @@
 package amp.okta
+
 import data.roles
 import data.resources
 
@@ -19,35 +20,33 @@ access_rights_for_user(user) = {
     "accessRights": access_rights_for_groups(user.groups)
 }
 
-access_rights_for_groups(groups) = [access_rights(resource, role) |
-    role := groups[k]
+access_rights_for_groups(groups) = [access_rights_for_resource(group, resource) |
+    group := groups[k]
     resource := data.resources[j]
-    access_rights := data.roles[role]
-    role_index := k
     j < count(data.resources)
     k < count(groups)
 ]
 
-access_rights(resource, role) = {
+access_rights_for_resource(role, resource) = {
     "resource": resource,
     "access": "view"
 } {
-    contains(access_rights[l].view, resource)
+    contains(data.roles[role].view, resource)
 }
 
-access_rights(resource, role) = {
+access_rights_for_resource(role, resource) = {
     "resource": resource,
     "access": "edit"
 } {
-    contains(access_rights[m].edit, resource)
+    contains(data.roles[role].edit, resource)
 }
 
-access_rights(resource, role) = {
+access_rights_for_resource(role, resource) = {
     "resource": resource,
     "access": "none"
 } {
-    not contains(access_rights[n].view, resource)
-    not contains(access_rights[o].edit, resource)
+    not contains(data.roles[role].view, resource)
+    not contains(data.roles[role].edit, resource)
 }
 
 contains(arr, elem) {
