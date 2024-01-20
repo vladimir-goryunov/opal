@@ -2,7 +2,7 @@ package amp.okta
 
 import future.keywords
 
-user_permissions {
+user_permissions[permission] {
     user := input.users[_]
     login := user.login
     groups := user.groups
@@ -12,12 +12,8 @@ user_permissions {
     }
 }
 
-access_right(resource, groups, roles) {
+access_right(resource, groups, roles) = access {
     access := get_access(groups, resource, roles)
-    {
-        "resource": resource,
-        "access": access
-    }
 }
 
 get_access(groups, resource, roles) = result {
