@@ -1,5 +1,4 @@
 package amp.okta
-
 import data.roles
 import data.resources
 
@@ -38,4 +37,8 @@ access_rights(resource, role) = {
 } {
     not contains(data.roles[role][p].view, resource)
     not contains(data.roles[role][q].edit, resource)
+}
+
+contains(arr, elem) {
+    elem = arr[_]
 }
