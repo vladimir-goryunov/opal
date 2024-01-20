@@ -1,5 +1,4 @@
 package amp.okta
-
 import data.roles
 
 user_permissions[permission] {
@@ -24,14 +23,14 @@ access_decision(resource, user, roles) = decision {
     decision := get_access_decision(permission, resource)
 }
 
-get_access_decision(permission, resource) = {"resource": resource, "access": "view"} {
+get_access_decision(permission, resource) = {"access": "view", "resource": resource} {
     permission != null
 }
 
-get_access_decision(permission, resource) = {"resource": resource, "access": "edit"} {
+get_access_decision(permission, resource) = {"access": "edit", "resource": resource} {
     permission == "edit"
 }
 
-get_access_decision(permission, resource) = {"resource": resource, "access": "deny"} {
+get_access_decision(permission, resource) = {"access": "deny", "resource": resource} {
     not permission
 }
