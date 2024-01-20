@@ -31,3 +31,11 @@ access_rights(resource, role) = {
 } {
     contains(data.roles[role][_].edit, resource)
 }
+
+access_rights(resource, role) = {
+    "resource": resource,
+    "access": "deny"
+} {
+    not contains(data.roles[role][_].view, resource)
+    not contains(data.roles[role][_].edit, resource)
+}
