@@ -4,6 +4,7 @@ import future.keywords
 
 userPermissions contains permission if {
 	some user in input.users
+
 	permission := {
 		"login": user.login,
 		"politics": politics(user)
@@ -11,10 +12,8 @@ userPermissions contains permission if {
 }
 
 politics(user) = resource {
-    #some resourceName in data.resources
-	resource := {
-	    "resource": data.resources
-	} # recognize(user, resourceName)
+    some resourceName in data.resources
+	resource := recognize(user, resourceName)
 }
 
 recognize(user, resourceName) = reco {
