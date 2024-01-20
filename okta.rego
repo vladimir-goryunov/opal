@@ -7,15 +7,19 @@ user_permissions[permission] {
     login := user.login
     permission := {
         "login": login,
-        "accessRights": [
-            {
-                "resource": resource,
-                "access": access_decision(resource, user, roles)
-            } |
-            role := user.groups[_]
-            resource := resource
-        ]
+        "accessRights": access_decisions(user, roles)
     }
+}
+
+access_decisions(user, roles) = decisions {
+    decisions := [
+        {
+            "resource": resource,
+            "access": access_decision(resource, user, roles)
+        } |
+        role := user.groups[_]
+        resource := resource
+    ]
 }
 
 access_decision(resource, user, roles) = decision {
