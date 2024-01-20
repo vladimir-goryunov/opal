@@ -19,3 +19,4 @@ user_permissions[permission] {
             access := role_permissions[resource]
         ]
     }
+}
