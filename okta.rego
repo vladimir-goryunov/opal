@@ -1,5 +1,6 @@
 package amp.okta
 
+
 import data.roles
 
 user_permissions[permission] {
@@ -10,21 +11,29 @@ user_permissions[permission] {
         "accessRights": [
             {
                 "resource": resource,
-                "access": access
+                "access": access(resource, user, roles)
             } |
             role := user.groups[_]
             resource := key
-            access := access(resource, user, roles)
         ]
     }
 }
 
-access(resource, user, roles) = result {
-    some role
+access(resource, user, roles) {
     role = user.groups[_]
-    some permission
     permission = roles[role][_][resource]
-    result := permission
-} else = "deny" {
-    result := "deny"
+    permission != null
+}
+
+access(resource, user, roles) = "view" {
+    access(resource, user, roles)
+}
+
+access(resource, user, roles) = "edit" {
+    access := access(resource, user, roles)
+    access == "edit"
+}
+
+access(resource, user, roles) = "deny" {
+    not access(resource, user, roles)
 }
