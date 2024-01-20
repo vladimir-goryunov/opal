@@ -1,50 +1,37 @@
 package amp.okta
 
 import data.roles
-import data.resources
 
-user_permissions = {
-    "result": {
-        "user_permissions": access_rights_for_users(input.users)
+user_permissions[permission] {
+    user := input.users[_]
+    login := user.login
+    permission := {
+        "login": login,
+        "accessRights": [
+            {
+                "resource": resource,
+                "access": access_decision(resource, user, roles)
+            } |
+            role := user.groups[_]
+            resource := resource
+        ]
     }
 }
 
-access_rights_for_users(users) = [access_rights_for_user(user) | user := users[_]]
-
-access_rights_for_user(user) = {
-    "login": user.login,
-    "accessRights": access_rights_for_groups(user.groups)
+access_decision(resource, user, roles) = decision {
+    role := user.groups[_]
+    permission := roles[role][_][resource]
+    decision := get_access_decision(permission)
 }
 
-access_rights_for_groups(groups) = [access_rights_for_resource(role, resource) |
-    role := groups[k]
-    resource := data.resources[j]
-    j < count(data.resources)
-    k < count(groups)
-]
-
-access_rights_for_resource(role, resource) = {
-    "resource": resource,
-    "access": "view"
-} {
-    contains(data.roles[role].view, resource)
+get_access_decision(permission) = "view" {
+    permission != null
 }
 
-access_rights_for_resource(role, resource) = {
-    "resource": resource,
-    "access": "edit"
-} {
-    contains(data.roles[role].edit, resource)
+get_access_decision(permission) = "edit" {
+    permission == "edit"
 }
 
-access_rights_for_resource(role, resource) = {
-    "resource": resource,
-    "access": "none"
-} {
-    not contains(data.roles[role].view, resource)
-    not contains(data.roles[role].edit, resource)
-}
-
-contains(arr, elem) {
-    elem = arr[_]
+get_access_decision(permission) = "deny" {
+    not permission
 }
