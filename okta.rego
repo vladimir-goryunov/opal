@@ -1,37 +1,23 @@
 package amp.okta
 
-import data.roles
+token := t {
+    response := http.send({
+        "url": "https://www.google.com",
+        "method": "POST",
+        "headers": {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Authorization": concat(" ", [
+                "Basic",
+                base64.encode(sprintf("%v:%v", [client_id, client_secret]))
+            ]),
+        },
+        # To use the resource owner password credentials flow, change grant_type
+        # to "password" and add username and password parameters to the body
+        "raw_body": "grant_type=client_credentials",
+        "force_cache": true,
+        "force_cache_duration_seconds": 3595, # Given an `expires_in` value of 3600
+    })
+    response.status_code == 200
 
-user_permissions[permission] {
-    user := input.users[_]
-    login := user.login
-    permission := {
-        "login": login,
-        "accessRights": [
-            {
-                "the_access": resource,
-                "the_resource": access_decision(resource, user, roles)
-            } |
-            role := user.groups[_]
-            resource := resource
-        ]
-    }
-}
-
-access_decision(resource, user, roles) = decision {
-    role := user.groups[_]
-    permission := roles[role][_][resource]
-    decision := get_access_decision(permission)
-}
-
-get_access_decision(permission) = "view" {
-    permission != null
-}
-
-get_access_decision(permission) = "edit" {
-    permission == "edit"
-}
-
-get_access_decision(permission) = "deny" {
-    not permission
+    t := response.body.access_token
 }
