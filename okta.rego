@@ -13,7 +13,7 @@ user_permissions[permission] {
                 "access": access_decision(resource, user, roles)
             } |
             role := user.groups[_]
-            resource := key
+            resource := resource
         ]
     }
 }
