@@ -22,7 +22,7 @@ access_right(resource, groups, roles) {
 
 get_access(groups, resource, roles) = result {
     some role
-    role := groups[_]
+    role = groups[_]
     role_permissions := roles[role][_]
     resource_access := role_permissions[resource]
     result := resource_access
