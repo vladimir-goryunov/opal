@@ -1,6 +1,6 @@
 package amp.okta
 
-import data.roles
+import data.policies.roles
 
 user_permissions[permission] {
     user := input.users[_]
