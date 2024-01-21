@@ -5,33 +5,18 @@ import data.roles
 user_permissions[permission] {
     user := input.users[_]
     login := user.login
+    groups := user.groups
     permission := {
         "login": login,
         "accessRights": [
             {
                 "resource": resource,
-                "access": access_decision(resource, user, roles)
+                "access": access[0]
             } |
-            role := user.groups[_]
-            resource := resource
+            role := groups[_]
+            role_permissions := roles[role][_]
+            resource := key
+            access := role_permissions[resource]
         ]
     }
-}
-
-access_decision(resource, user, roles) = decision {
-    role := user.groups[_]
-    permission := roles[role][_][resource]
-    decision := get_access_decision(permission)
-}
-
-get_access_decision(permission) = "view" {
-    permission != null
-}
-
-get_access_decision(permission) = "edit" {
-    permission == "edit"
-}
-
-get_access_decision(permission) = "deny" {
-    not permission
 }
