@@ -14,7 +14,7 @@
             {"edit": ["Contracts"]}
         ],
         "Guest": [
-            {"view": ["Common", "Contracts", "Temp"]}
+            {"view": ["Temp"]}
         ]
     }
 }
