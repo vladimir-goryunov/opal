@@ -19,7 +19,8 @@ user_permissions[permission] {
             #resource := role_permissions[access]
 
             resource := data.resources[_]
-            access := get_access(role_permissions, resource)
+            access := key
+            #access := get_access(role_permissions, resource)
 
         ]
     }
