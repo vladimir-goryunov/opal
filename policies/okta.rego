@@ -8,7 +8,7 @@ user_permissions[permission] {
     groups := user.groups
     permission := {
         "login": login,
-        "permissions": [
+        "accessRights": [
             {
                 "access": access,
                 "resource": resource[_]
