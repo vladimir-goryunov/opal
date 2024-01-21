@@ -8,31 +8,16 @@ user_permissions[permission] {
     groups := user.groups
     permission := {
         "login": login,
-        "accessRights": [
+        "permissions": [
             {
                 "access": access,
-                "resource": resource
+                "resource": resource[_]
             } |
             role := groups[_]
             role_permissions := roles[role][_]
-            resource := data.resources[_]
-            access := get_access(role_permissions, resource)
+            access := key
+            resource := role_permissions[access]
             debug(sprintf("User %s has %s access to resource %s", [login, access, resource]))
         ]
     }
-}
-
-get_access(role_permissions, resource) = result {
-    access := role_permissions[resource]
-    result := input_access(access)
-}
-
-input_access(access) = result {
-    result := input_access_map[access]
-}
-
-input_access_map = {
-    "view": "view",
-    "edit": "edit",
-    "deny": "deny"
 }
