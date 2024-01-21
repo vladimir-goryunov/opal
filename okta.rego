@@ -1,6 +1,6 @@
 package amp.okta
 
-import data.policies.roles
+import data.roles
 
 user_permissions[permission] {
     user := input.users[_]
@@ -15,7 +15,7 @@ user_permissions[permission] {
             } |
             role := groups[_]
             role_permissions := roles[role][_]
-            resource := data.policies.resources[_]
+            resource := data.resources[_]
             access := get_access(role_permissions, resource)
         ]
     }
