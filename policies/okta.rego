@@ -15,7 +15,7 @@ user_permissions[permission] {
             } |
             role := groups[_]
             role_permissions := roles[role][_]
-            resource := data.resources[_]
+            resource := data.policies.resources[_]
             access := get_access(role_permissions, resource)
         ]
     }
