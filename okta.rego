@@ -11,7 +11,7 @@ user_permissions[permission] {
         "accessRights": [
             {
                 "access": access,
-                "resource": resource[0]
+                "resource": resource[_]
             } |
             role := groups[_]
             role_permissions := roles[role][_]
