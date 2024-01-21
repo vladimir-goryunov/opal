@@ -12,11 +12,12 @@ user_permissions[permission] {
             {
                 "access": access,
                 "resource": resource
-            } |
+            |
             role := groups[_]
             role_permissions := roles[role][_]
             resource := data.resources[_]
             access := get_access(role_permissions, resource)
+            debug(sprintf("User %s has %s access to resource %s", [login, access, resource]))
         ]
     }
 }
