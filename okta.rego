@@ -17,7 +17,7 @@ user_permissions[permission] {
             role_permissions := roles[role][_]
             access := key
             resource := role_permissions[access]
-            debug(sprintf("User %s has %s access to resource %s", [login, access, resource]))
+            printf("User %s has %s access to resource %s", [login, access, resource])
         ]
     }
 }
