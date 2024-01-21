@@ -10,13 +10,13 @@ user_permissions[permission] {
         "login": login,
         "accessRights": [
             {
-                "access": resource,
-                "resource": access[0]
+                "access": access,
+                "resource": resource[0]
             } |
             role := groups[_]
             role_permissions := roles[role][_]
-            resource := key
-            access := role_permissions[resource]
+            access := key
+            resource := role_permissions[access]
         ]
     }
 }
