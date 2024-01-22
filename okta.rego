@@ -16,7 +16,7 @@ user_permissions[permission] {
 generatePermissionsForUser(login, groups) = permissions {
     #permissions := generatePermissionsForGroups(groups)
     permissions := {
-        "groups[_]": "groups[_]"
+        "groups[_]": groups[0]
     }
 }
 
