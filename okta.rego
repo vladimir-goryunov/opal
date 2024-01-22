@@ -14,30 +14,17 @@ user_permissions[permission] {
 }
 
 generatePermissionsForUser(login, groups) = permissions {
-    #permissions := generatePermissionsForGroups(groups)
-
-    #permissions := {
-    #    "group": groups[0]
-    #}
-    permissions := parseGroups(groups)
+    permissions := generatePermissionsForGroups(groups)
 }
 
-parseGroups(groups) = result {
-    result := groups[_]
-}
+generatePermissionsForGroups(groups) = [access | group_permissions := map[group | group := groups][_]; access := generateAccessForGroup(group_permissions, roles)]
 
-
-generatePermissionsForGroups(groups) = [access | group := groups[_]; role := group; access := generateAccess(role, roles, group)]
-
-generateAccess(role, roles, group) = access {
+generateAccessForGroup(group_permissions, roles) = access {
+    role := group_permissions
     role_permissions := roles[role][_]
     access := {
         "access": key,
         "resource": role_permissions[key],
-        "role": role,
-        "debug_info": {
-            "group": group,
-            "role_permissions": role_permissions
-        }
+        "role": role
     }
 }
