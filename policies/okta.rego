@@ -4,22 +4,19 @@ import future.keywords
 
 policies contains policy if {
     user := input.users[_]
-
-    some resourceName in data.policies.resources
-
     policy := {
         "login": user.login,
-        "permission": permission(resourceName, user, data.policies.roles)
+        "accessResource": accessResource(user, data.policies.roles)
     }
 }
 
-permission(resourceName, user, roles) = result {
+accessResource(user, roles) = result {
     some role
     role in user.groups
-    resourceName in roles[role][_]["edit"]
-    result := [{"access": "edit", "resource": resourceName}]
-} else = [{"access": "view", "resource": resourceName}] {
-    some role
-    role in user.groups
-    resourceName in roles[role][_]["view"]
-} else = [{"access": "deny", "resource": resourceName}]
+    some access
+    access := roles[role][_]
+    result := [{"access": access, "resource": resource} |
+        resource := data.policies.resources[_]
+        access := access[resource]
+    ]
+}
