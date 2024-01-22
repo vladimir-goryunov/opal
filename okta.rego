@@ -5,20 +5,20 @@ import data.roles
 user_permissions[permission] {
     user := input.users[_]
     login := user.login
-    groups := user.groups[_]
-    permission := generatePermissions(login, groups)
+    user_groups := user.groups[_]
+    permission := generatePermissions(login, user_groups)
 }
 
-generatePermissions(login, groups) = permissions {
+generatePermissions(login, user_groups) = permissions {
     permissions := {
         "login": login,
-        "permissions": generateAccessList(groups)
+        "permissions": generateAccessList(user_groups)
     }
 }
 
-generateAccessList(groups) = result {
+generateAccessList(user_groups) = result {
     some role
-    role in groups
+    role in user_groups
     result := "role"
 }
 
