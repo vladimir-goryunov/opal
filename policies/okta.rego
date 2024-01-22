@@ -1,7 +1,5 @@
 package amp.okta
 
-import future.keywords
-
 policies contains policy if {
     user := input.users[_]
     policy := {
@@ -12,11 +10,10 @@ policies contains policy if {
 
 accessResource(user, roles) = result {
     some role
-    role in user.groups
-    some access
-    access := roles[role][_]
-    result := [{"access": a, "resource": r} |
-        r := data.policies.resources[_]
-        a := access[r]
+    role = user.login
+    result := [{"access": access, "resource": resource} |
+        role_access := roles[role]
+        resource := role_access[_]
+        access := role_access[resource]
     ]
 }
