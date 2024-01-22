@@ -4,7 +4,6 @@ import future.keywords
 
 policies contains policy if {
     user := input.users[_]
-    some resourceName in data.policies.resources
     policy := {
         "login": user.login,
         "accessResource": accessResource(user, data.policies.roles)
