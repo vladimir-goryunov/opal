@@ -16,9 +16,8 @@ generatePermissionsForUser(login, groups) = permissions {
     }
 }
 
-generatePermissionsForGroups(groups) = [access | group := groups[_]; access := generateAccessForGroups(group)]
-
-generateAccessForGroups(group) = access {
+generatePermissionsForGroups(groups) = {access |
+    group := groups[_]
     role := group
     access := generateAccess(role, roles)
 }
