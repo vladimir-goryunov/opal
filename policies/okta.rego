@@ -9,10 +9,9 @@ policies contains policy if {
 }
 
 accessResource(user, roles) = result {
-    some role
-    role = user.login
+    role := user.login
+    role_access := roles[role]
     result := [{"access": access, "resource": resource} |
-        role_access := roles[role]
         resource := role_access[_]
         access := role_access[resource]
     ]
