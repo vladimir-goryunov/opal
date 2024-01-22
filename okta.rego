@@ -21,9 +21,9 @@ generateAccessList(groups) = accessList {
 }
 
 generateAccess(role, groups, roles) = {
-    "access": access,
-    "resource": resource,
-    "role": role
+    "access_to_resource": access,
+    "resource_name": resource,
+    "role_name": role
 } {
     role_permissions := roles[role][_]
     access := key
