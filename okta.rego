@@ -23,7 +23,7 @@ generatePermissionsForUser(login, groups) = permissions {
 }
 
 parseGroups(groups) = result {
-    result := groups[0]
+    result := groups[_]
 }
 
 
