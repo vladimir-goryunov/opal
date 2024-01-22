@@ -29,12 +29,12 @@ user_permissions[permission] {
 
 get_access(resourceName, groups, roles) = result {
     some role
-    role in groups
+    role in groups[_]
     resourceName in roles[role][_]["edit"]
     result := "edit"
 } else = "view" {
     some role
-    role in groups
+    role in groups[_]
     resourceName in roles[role][_]["view"]
 } else = "deny"
 
