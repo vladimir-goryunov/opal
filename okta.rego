@@ -12,14 +12,15 @@ user_permissions[permission] {
             {
                 "access": access,
                 "resource": resource[_],
-                "role": role
+                "role": role,
+                "data.resource": data_resource
             } |
             role := groups[_]
             role_permissions := roles[role][_]
             access := key
             resource := role_permissions[access]
 
-            #resource := data.resources[_]
+            data_resource := data.resources[_]
             #access := get_access(role_permissions, resource)
 
         ]
