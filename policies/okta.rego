@@ -1,18 +1,25 @@
 package amp.okta
 
-policies_contains_policy {
-    some user
+import future.keywords
+
+policies contains policy if {
     user := input.users[_]
+
+    some resourceName in data.policies.resources
+
     policy := {
         "login": user.login,
-        "accessResource": accessResource(user, data.policies.roles)
+        "accessResource": accessResource(resourceName, user, data.policies.roles)
     }
 }
 
-accessResource(user, roles) = result {
-    role_access := roles[user.login]
-    result := [{"access": access, "resource": resource} |
-        resource := role_access[_]
-        access := role_access[resource]
-    ]
-}
+accessResource(resourceName, user, roles) = result {
+    some role
+    role in user.groups
+    resourceName in roles[role][_]["edit"]
+    result := [{"access": "edit", "resource": resourceName}]
+} else = [{"access": "view", "resource": resourceName}] {
+    some role
+    role in user.groups
+    resourceName in roles[role][_]["view"]
+} else = [{"access": "deny", "resource": resourceName}]
