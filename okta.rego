@@ -36,4 +36,6 @@ get_access(resourceName, groups, roles) = result {
     some role
     role = groups[_]
     resourceName in roles[role][_]["view"]
-} else = "deny"
+} else = "deny" {
+    result := "deny"
+}
