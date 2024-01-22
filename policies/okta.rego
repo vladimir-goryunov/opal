@@ -1,7 +1,8 @@
 package amp.okta
 
+import data.policies
+
 policies_contains_policy {
-    some user
     user := input.users[_]
     policy := {
         "login": user.login,
