@@ -22,7 +22,7 @@ user_permissions[permission] {
             resource := role_permissions[access]
 
             data_resource := data.resources[_]
-            access_to_resource := get_access(resource, groups, roles)
+            access_to_resource := groups[_] #get_access(resource, groups, roles)
         ]
     }
 }
