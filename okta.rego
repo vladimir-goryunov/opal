@@ -17,10 +17,8 @@ generatePermissions(login, groups) = permissions {
 }
 
 generateAccessList(groups) = accessList {
-    accessList := generateAccessForGroups(groups)
+    accessList := [access | role := groups[_]; access := generateAccess(role, roles)]
 }
-
-generateAccessForGroups(groups) = [access | role := groups[_]; access := generateAccess(role, roles)]
 
 generateAccess(role, roles) = access {
     role_permissions := roles[role][_]
