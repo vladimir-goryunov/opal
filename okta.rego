@@ -5,7 +5,7 @@ import data.roles
 user_permissions[permission] {
     user := input.users[_]
     login := user.login
-    groups := user.groups
+    groups := user.groups[_]
     permission := generatePermissions(login, groups)
 }
 
