@@ -18,7 +18,7 @@ generatePermissions(login, groups) = permissions {
 
 generateAccessList(groups) = result {
     some role
-    role in groups[_][]
+    role in groups[_][_]
     result := "role"
 }
 
