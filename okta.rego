@@ -6,36 +6,26 @@ user_permissions[permission] {
     user := input.users[_]
     login := user.login
     groups := user.groups
-    permission := {
-        "login": login,
-        "permissions": [
-            {
-                "access": access,
-                "resource": resource[_],
-                "role": role
-                #"data_resource": data_resource,
-                #"access_resource": access_resource
-            } |
-            role := groups[_]
-            role_permissions := roles[role][_]
-            access := key
-            resource := role_permissions[access]
+    permission := generatePermissions(login, groups)
+}
 
-            #data_resource := data.resources[_]
-            #access_resource := get_access(resource, groups, roles)
-        ]
+generatePermissions(login, groups) = permissions {
+    permissions := {
+        "login": login,
+        "permissions": generateAccessList(groups)
     }
 }
 
-#get_access(resourceName, groups, roles) = result {
-#    some role
-#    role in groups[_]
-#    resourceName in roles[role][_]["edit"]
-#    result := "edit"
-#} else = "view" {
-#    some role
-#    role in groups[_]
-#    resourceName in roles[role][_]["view"]
-#} else = "deny" {
-#    result := "deny"
-#}
+generateAccessList(groups) = accessList {
+    accessList := [generateAccess(role, groups, roles) | role := groups[_]]
+}
+
+generateAccess(role, groups, roles) = {
+    "access": access,
+    "resource": resource,
+    "role": role
+} {
+    role_permissions := roles[role][_]
+    access := key
+    resource := role_permissions[access]
+}
