@@ -2,7 +2,7 @@ package amp.okta
 
 import data.policies
 
-policies_contains_policy {
+policies contains policy if {
     user := input.users[_]
     policy := {
         "login": user.login,
