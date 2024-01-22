@@ -9,11 +9,11 @@ policies contains policy if {
 
     policy := {
         "login": user.login,
-        "accessResource": accessResource(resourceName, user, data.policies.roles)
+        "permission": permission(resourceName, user, data.policies.roles)
     }
 }
 
-accessResource(resourceName, user, roles) = result {
+permission(resourceName, user, roles) = result {
     some role
     role in user.groups
     resourceName in roles[role][_]["edit"]
