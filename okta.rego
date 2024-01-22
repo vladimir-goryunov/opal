@@ -6,23 +6,17 @@ user_permissions[permission] {
     user := input.users[_]
     login := user.login
     groups := user.groups
-    permission := generatePermissions(login, groups)
+    permission := generatePermissionsForUser(login, groups)
 }
 
-generatePermissions(login, groups) = permissions {
+generatePermissionsForUser(login, groups) = permissions {
     permissions := {
         "login": login,
-        "permissions": generateAccessList(groups)
+        "permissions": generatePermissionsForGroups(groups)
     }
 }
 
-generateAccessList(groups) = accessList {
-    accessList := generateAccessForGroups(groups)
-}
-
-generateAccessForGroups(groups) = accessList {
-    accessList := [access | role := groups[_]; access := generateAccess(role, roles)]
-}
+generatePermissionsForGroups(groups) = [access | role := groups[_]; access := generateAccess(role, roles)]
 
 generateAccess(role, roles) = access {
     role_permissions := roles[role][_]
