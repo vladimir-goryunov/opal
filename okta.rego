@@ -17,13 +17,17 @@ generatePermissionsForUser(login, groups) = permissions {
     permissions := generatePermissionsForGroups(groups)
 }
 
-generatePermissionsForGroups(groups) = [access | group := groups[_]; role := group; access := generateAccess(role, roles)]
+generatePermissionsForGroups(groups) = [access | group := groups[_]; role := group; access := generateAccess(role, roles, group)]
 
-generateAccess(role, roles) = access {
+generateAccess(role, roles, group) = access {
     role_permissions := roles[role][_]
     access := {
         "access": key,
         "resource": role_permissions[key],
-        "role": role
+        "role": role,
+        "debug_info": {
+            "group": group,
+            "role_permissions": role_permissions
+        }
     }
 }
