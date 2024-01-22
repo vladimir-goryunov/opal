@@ -2,12 +2,12 @@ package amp.okta
 
 import future.keywords
 
-permissions contains resource if {
+policies contains policy if {
 	user := input.users[_]
 
 	some resourceName in data.policies.resources
 
-	resource := {
+	policy := {
 	    "login": user.login,
 		"resource": resourceName,
 		"access": access(resourceName, user, data.policies.roles)
