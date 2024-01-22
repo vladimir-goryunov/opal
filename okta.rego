@@ -22,30 +22,33 @@ user_permissions[permission] {
             resource := role_permissions[access]
 
             data_resource := data.resources[_]
-            access_to_resource := get_access(role_permissions, resource)
+            access_to_resource := get_access(resource, groups, roles)
         ]
     }
 }
 
-get_access(role_permissions, resource) = result {
-    access_to_resource := role_permissions[resource]
-    result := input_access(access_to_resource)
-}
+get_access(resourceName, groups, roles) = result {
+    some role
+    role in groups
+    resourceName in roles[role][_]["edit"]
+    result := "edit"
+} else = "view" {
+    some role
+    role in groups
+    resourceName in roles[role][_]["view"]
+} else = "deny"
 
+#get_access(roles, resource) = result {
+#    access := role_permissions[resource]
+#    result := input_access(access)
+#}
+#
 #input_access(access_to_resource) = result {
 #    result := input_access_map[access_to_resource]
 #}
-
-input_access(access_to_resource) = result {
-    access_to_resource in input_access_map["edit"]
-    result := "edit"
-} else = "view" {
-    access_to_resource in input_access_map["view"]
-    result := "view"
-} else = "deny"
-
-input_access_map = {
-    "view": "view",
-    "edit": "edit",
-    "deny": "deny"
-}
+#
+#input_access_map = {
+#    "view": "view",
+#    "edit": "edit",
+#    "deny": "deny"
+#}
