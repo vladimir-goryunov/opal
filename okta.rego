@@ -22,12 +22,11 @@ generateAccessList(groups) = accessList {
 
 generateAccessForGroups(groups) = [access | role := groups[_]; access := generateAccess(role, roles)]
 
-generateAccess(role, roles) = {
-    "access": key,
-    "resource": resource,
-    "role": role
-} {
+generateAccess(role, roles) = access {
     role_permissions := roles[role][_]
-    access := role_permissions[key]
-    resource := key
+    access := {
+        "access": key,
+        "resource": role_permissions[key],
+        "role": role
+    }
 }
