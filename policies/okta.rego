@@ -4,7 +4,7 @@ import future.keywords
 
 permissions contains resource if {
     # Now this is a single object!!!
-	user := input.users
+	user := input.users[_]
 
 	some resourceName in data.policies.resources
 
