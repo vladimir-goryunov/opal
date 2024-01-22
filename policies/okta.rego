@@ -1,5 +1,7 @@
 package amp.okta
 
+import future.keywords
+
 permissions contains resource if {
 	token := input.token
 
