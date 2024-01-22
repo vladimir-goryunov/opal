@@ -15,8 +15,8 @@ accessResource(user, roles) = result {
     role in user.groups
     some access
     access := roles[role][_]
-    result := [{"access": access, "resource": resource} |
-        resource := data.policies.resources[_]
-        access := access[resource]
+    result := [{"access": a, "resource": r} |
+        r := data.policies.resources[_]
+        a := access[r]
     ]
 }
