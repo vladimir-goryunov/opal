@@ -1,6 +1,6 @@
 package amp.okta
 
-policies contains policy if {
+policies_contains_policy {
     user := input.users[_]
     policy := {
         "login": user.login,
@@ -9,8 +9,7 @@ policies contains policy if {
 }
 
 accessResource(user, roles) = result {
-    role := user.login
-    role_access := roles[role]
+    role_access := roles[user.login]
     result := [{"access": access, "resource": resource} |
         resource := role_access[_]
         access := role_access[resource]
