@@ -3,7 +3,8 @@ package amp.okta
 import data.roles
 
 user_permissions[permission] {
-    user := input.users[_]
+    #user := input.users[_]
+    user := input.users[0]
     login := user.login
     groups := user.groups
     permission := generatePermissions(login, groups)
