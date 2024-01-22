@@ -8,7 +8,7 @@ permissions contains resource if {
 	some resourceName in data.policies.resources
 
 	resource := {
-	    "login": user.login,
+	    "user_login": user.login,
 		"resource": resourceName,
 		"access": access(resourceName, user, data.policies.roles)
 	}
