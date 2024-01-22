@@ -21,7 +21,7 @@ generatePermissionsForGroups(groups) = [access | group_permissions := map[group 
 
 generateAccessForGroup(group_permissions, roles) = access {
     role := group_permissions
-    role_permissions := roles[role][_]
+    role_permissions := roles[role]
     access := {
         "access": key,
         "resource": role_permissions[key],
