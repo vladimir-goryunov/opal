@@ -1,45 +1,24 @@
 {
     "resources": [
-        "brand",
-        "publisher",
-        "page",
-        "placement",
-        "control",
-        "sspPricing",
-        "advertiser",
-        "insertionOrder",
-        "campaign",
-        "audience",
-        "dspPricing",
-        "creative",
-        "asset",
-        "plaFeed"
+        "Common",
+        "Contracts",
+        "Temp"
     ],
     "roles": {
-        "AMPLIFY_DEMAND_MANAGER": [
-            {"view": ["brand", "publisher", "page", "placement", "control", "sspPricing", "advertiser", "campaign", "audience", "creative", "asset", "plaFeed"]},
-            {"edit": ["insertionOrder", "dspPricing"]}
+        "Admin": [
+            {"view": ["Common", "Contracts", "Temp"]},
+            {"edit": ["Common", "Contracts", "Temp"]}
         ],
-        "AMPLIFY_DEMAND_EDITOR": [
-            {"view": ["publisher", "page", "placement", "control", "sspPricing", "plaFeed"]},
-            {"edit": ["brand", "advertiser", "insertionOrder", "campaign", "audience", "dspPricing", "creative", "asset"]}
+        "User": [
+            {"view": ["Common", "Temp"]},
+            {"edit": ["Contracts"]}
         ],
-        "AMPLIFY_SUPPLY_MANAGER": [
-            {"view": ["brand", "publisher", "page", "placement", "advertiser", "insertionOrder", "campaign", "audience", "dspPricing", "creative", "asset", "plaFeed"]},
-            {"edit": ["control", "sspPricing"]}
+        "Guest": [
+            {"view": ["Temp"]}
         ],
-        "AMPLIFY_SUPPLY_EDITOR": [
-            {"view": ["advertiser", "insertionOrder", "campaign", "dspPricing", "plaFeed"]},
-            {"edit": ["brand", "publisher", "page", "placement", "control", "sspPricing", "audience", "creative", "asset"]}
-        ],
-        "AMPLIFY_EXEC_MANAGER": [
-            {"view": ["brand", "publisher", "page", "placement", "control", "sspPricing", "advertiser", "insertionOrder", "campaign", "audience", "dspPricing", "creative", "asset", "plaFeed"]}
-        ],
-        "AMPLIFY_ADMIN_MANAGER": [
-            {"view": ["brand", "publisher", "page", "placement", "control", "sspPricing", "advertiser", "insertionOrder", "campaign", "audience", "dspPricing", "creative", "asset", "plaFeed"]}
-        ],
-        "AMPLIFY_ADMIN_TECH": [
-            {"edit": ["brand", "publisher", "page", "placement", "control", "sspPricing", "advertiser", "insertionOrder", "campaign", "audience", "dspPricing", "creative", "asset", "plaFeed"]}
+        "Everyone": [
+            {"view": ["Contracts"]},
+            {"edit": ["Common", "Temp"]}
         ]
     }
 }
