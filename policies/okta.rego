@@ -8,8 +8,8 @@ policies contains policy if {
     some resourceName in data.policies.resources
 
     policy := {
-        "the_login": user.login,
-        "the_permissions": permissions(resourceName, user, data.policies.roles)
+        "login": user.login,
+        "permissions": permissions(resourceName, user, data.policies.roles)
     }
 }
 
