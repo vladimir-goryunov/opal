@@ -15,6 +15,10 @@
         ],
         "Guest": [
             {"view": ["Temp"]}
+        ],
+        "Everyone": [
+            {"view": ["Contracts"]},
+            {"edit": ["Common", "Temp"]}
         ]
     }
 }
