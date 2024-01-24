@@ -8,12 +8,12 @@ policies contains policy if {
     some resourceName in data.policies.resources
 
     policy := {
-        "name": user.login,
-        "permissions": permission(resourceName, user, data.policies.roles)
+        "login": user.login,
+        "permissions": permissions(resourceName, user, data.policies.roles)
     }
 }
 
-permission(resourceName, user, roles) = result {
+permissions(resourceName, user, roles) = result {
     some role
     role in user.groups
     resourceName in roles[role][_]["edit"]
